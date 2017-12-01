@@ -1,7 +1,7 @@
 module.exports = {
     entry: './src/js/main.js',
     output: {
-        path: './build',
+        path: __dirname + '/build/assets',
         filename: 'prod-main.js',
         publicPath: 'index.html'
     },
@@ -12,9 +12,9 @@ module.exports = {
     module: {
          loaders: [
           {
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            loader: 'babel',
+            loader: 'babel-loader',
             query: {
                 presets: ['es2015', 'react']
             }

@@ -1,4 +1,11 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+#webpack build files
+build/assets/prod-main.js
+
 node_modules
 
-build
 
