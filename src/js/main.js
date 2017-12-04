@@ -2,7 +2,7 @@ document.body.innerHTML = d3.version;
 
 // LINEAR
 let linearScale = d3.scaleLinear()
-  .domain([0, 100]) // representing the range of possible values of scores
+  .domain([0, 100]) // representing the range of possible values of input
   .range([0, 1]) // output range, stuff domain being mapped to
   .clamp(true);  // gets rounded to closest if outside limits
 // console.log(linearScale(99)); // => 0.99
@@ -26,5 +26,23 @@ let quantizeScaleColour = d3.scaleQuantize()
   .range(["red", "pink"]);
 // console.log(quantizeScaleColour(22)); // => "red"
 // console.log(quantizeScaleColour.invertExtent("red")); // => [0, 50]
+
+//USING DATA
+// d3.csv('data/data.csv', data => { return data; }); => for .csv
+
+d3.json('data/data.json', (data) => { 
+    let extentData = d3.extent(data, (d) => d.age);
+    console.log(extentData); // => [13, 38]  meaning: [min max]
+
+    let scale = d3.scaleLinear().domain(extentData).range([0, 100]);
+    console.log(scale(18)); // => 
+    
+    let uniqueAges = d3.set(data, (d) => d.age );
+    console.log(uniqueAges.values()); // => ["23", "38", "13", "37"]
+  }
+)
+
+
+
 
 
