@@ -1,4 +1,4 @@
-document.body.innerHTML = d3.version;
+// document.body.innerHTML = `<p>${d3.version}</p>`;
 
 // LINEAR
 let linearScale = d3.scaleLinear()
@@ -27,22 +27,25 @@ let quantizeScaleColour = d3.scaleQuantize()
 // console.log(quantizeScaleColour(22)); // => "red"
 // console.log(quantizeScaleColour.invertExtent("red")); // => [0, 50]
 
-//USING DATA
+// USING DATA
 // d3.csv('data/data.csv', data => { return data; }); => for .csv
 
 d3.json('data/data.json', (data) => { 
     let extentData = d3.extent(data, (d) => d.age);
-    console.log(extentData); // => [13, 38]  meaning: [min max]
-
+    // console.log(extentData); // => [13, 38]  meaning: [min max]
     let scale = d3.scaleLinear().domain(extentData).range([0, 100]);
-    console.log(scale(18)); // => 
-    
+    // console.log(scale(18)); // => 20    
     let uniqueAges = d3.set(data, (d) => d.age );
-    console.log(uniqueAges.values()); // => ["23", "38", "13", "37"]
+    // console.log(uniqueAges.values()); // => ["23", "38", "13", "37"]
   }
 )
 
+// SELECTION
 
-
+let link = d3.selectAll('a:nth-child(2)');
+console.log(link.nodes()); // => [a}
+console.log(link.attr('href')); // => #
+link.attr('href', 'http://google.com')
+console.log(link.attr('href')); // => http://google.com
 
 
