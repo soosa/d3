@@ -4,3 +4,10 @@
   min-width: 200px;
   min-height: 350px;
 }
+
+.bars {
+ height: 30px;
+ border: 1px solid grey;
+ background: orange;
+ margin-top: 2px;
+}
