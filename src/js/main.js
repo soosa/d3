@@ -43,13 +43,24 @@ d3.json('data/data.json', (data) => {
 // SELECTION
 
 let link = d3.selectAll('a:nth-child(2)');
-  console.log(link.nodes()); // => [a]  
-  console.log(link.attr('href')); // => # getter
-link.attr('href', 'http://google.com') // setter
+// console.log(link.nodes()); // => [a]  
+// console.log(link.attr('href')); // => # getter
+
+link.attr('href', 'http://google.com') // setter   
+  .append('button') // changing the selection
     .style('color', 'red')
     .classed('red', true)
     .text("inventory")
     .html("<b>SALE</b>");
-  console.log(link.attr('href')); // => http://google.com
+// console.log(link.attr('href')); // => http://google.com
+
+d3.select('.title')
+  .insert('span','a:first-child') // before first child
+    .style('color', 'green')
+    .html("<b>BOOK</b>");
+
+d3.select('.action').remove();
+
+
 
 
