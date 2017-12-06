@@ -1,14 +1,13 @@
 import scores from '../../data/scores.js';
 
 d3.select('.chart')
+  .append('svg')
+    .attr('width', 225)  // to overwrite default values
+    .attr('height', 300)
   .selectAll('div')
   .data(scores)
   .enter()
-    .append('div')
-    .text((d) => d.name )
-    .style('color', 'green');  //only updated will be green
-
-update.exit().remove();  // removes Walter as it is not in the data(update)
-
-update.merge(enter)
-  .style('width', d => d.score + 'px');
+    .append('rect')
+    .attr('y', (d, i) => i * 33) // d -> data, i -> index
+    .style('width', d => d.score)
+    .classed('bars', true);
