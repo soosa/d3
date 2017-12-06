@@ -1,20 +1,41 @@
 import scores from '../../data/scores.js';
+import $ from 'jquery';
 
-let bar = d3.select('.chart')  // select the chart target div
-  .append('svg')               // appended an explicitly sized SVG  
+let bar = d3.select('.chart')
+  .append('svg')
     .attr('width', 225)  
     .attr('height', 300)
-  .selectAll('g')  // data join methodology to create a collection of G elements
+  .selectAll('g')  
   .data(scores)
   .enter()
     .append('g')
     .attr('transform', (d, i) => 'translate( 10, ' + i * 35 + ')');
 
-bar.append('rect')  //append a rectangle and a text element to each one of the graphics containers
+function fade (selection, opacity) {
+  selection.style('fill-opacity', opacity)
+}
+
+bar.append('rect')
   .style('width', d => d.score)
   .text( d => d.name)
-  .classed('bars', true);
+  .classed('bars', true)
+  .on('mouseover', function (d, i, elements) { 
+   // d3.select(this).classed('bars--on', true);
+    d3.selectAll(elements)
+      .filter(':not(:hover)')
+      .call(fade, 0.5);
+  })
+  .on('mouseout', function(d, i, elements) { 
+   // d3.select(this).classed('bars--on', false);
+    d3.selectAll(elements) 
+      .call(fade, 1);
+  });
 
 bar.append('text')
   .attr('y', 20)
   .text( d => d.name);
+
+/*  event handlers:
+.on('click' () => )
+.on('mouseover' () => )
+*/
