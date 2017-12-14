@@ -3,14 +3,10 @@ let margin = { top: 10, right: 20, bottom: 30, left: 30 };
 let width = 400 - margin.left - margin.right;
 let height = 600 - margin.top - margin.bottom;
 
-let fullWidth = width + margin.left + margin.right;
-let fullHeight = height + margin.top + margin.bottom;
-
 let svg =  d3.select('.chart')
   .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
-    .attr('viewBox', `0 0 ${fullWidth*2} ${fullHeight*2}`) // *2 shrinks the chart
   .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
