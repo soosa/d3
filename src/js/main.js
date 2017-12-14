@@ -1,12 +1,16 @@
 
-let margin = { top: 25, right: 25, bottom: 25, left: 45 };
-let width = 425 - margin.left - margin.right;
-let height = 625 - margin.top - margin.bottom;
+let margin = { top: 10, right: 20, bottom: 30, left: 30 };
+let width = 400 - margin.left - margin.right;
+let height = 600 - margin.top - margin.bottom;
+
+let fullWidth = width + margin.left + margin.right;
+let fullHeight = height + margin.top + margin.bottom;
 
 let svg =  d3.select('.chart')
   .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
+    .attr('viewBox', `0 0 ${fullWidth*2} ${fullHeight*2}`) // *2 shrinks the chart
   .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -18,9 +22,9 @@ svg.append('rect')
 
 let yScale = d3.scaleLinear()
   .domain([0, 1])
-  .range([height, 0]);  // y dimension runs from top to bottom in svg
+  .range([height, 0]); 
 
-let yAxis = d3.axisLeft(yScale); //.ticks(5, '%') etc. to customise
+let yAxis = d3.axisLeft(yScale); 
 svg.call(yAxis);
 
 let xScale = d3.scaleTime()
