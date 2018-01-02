@@ -7,6 +7,7 @@ let svg =  d3.select('.chart')
   .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
+    .call(responsivefy)
   .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -38,7 +39,8 @@ svg
     .attr('transform', `translate(0, ${height})`)
   .call(xAxis);
 
-function responsify(svg) {
+function responsivefy(svg) {
+  console.log("boo");
   // get container + svg aspect ratio
   let container = d3.select(svg.node().parentNode),
     width = parseInt(svg.style("width")),
@@ -51,16 +53,17 @@ function responsify(svg) {
     .attr("preserveAspectRatio", "xMinYMid")
     .call(resize);
   
-  // to register multiple listeners for same event type,
-  // you need to add namespace, i.e., 'click.foo'
-  // necessary if you call invoke this function for multiple svgs
   // api docs: https://github.com/mbostock/d3/wiki/Selection#on
+  // whenever the browser window gets resized, it's going to call this function.
+  // It's going to go find the width of the parent container, 
+  // and set the SVG's width attribute to the same width as that container.
   d3.select(window).on("resize." + container.attr("id"), resize);
 
   //get width of container and resize svg to fit it
   function resize() {
-    var targetWidth = parseInt(container.style("width"));
+    let targetWidth = parseInt(container.style("width"));
     svg.attr("width", targetWidth);
     svg.attr("height", Math.round(targetWidth / aspect));
   }
 }
+
